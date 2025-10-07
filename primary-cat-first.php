@@ -3,7 +3,7 @@
 * Plugin Name:       Primary Category First in REST API
 * Plugin URI:        https://blog.utc.edu/
 * Description:       Yoast or Rank Math primary category to front of categories array in REST API response for posts.
-* Version:           1.0.0
+* Version:           1.0.1
 * Author:            Chris Gilligan
 * Author URI:        https://chrisgilligan.com
 * License:           GPL-2.0+
@@ -68,4 +68,8 @@ function pcr_reorder_rest_api_categories($data, $post, $context)
     return $data;
 }
 add_filter('rest_prepare_post', 'pcr_reorder_rest_api_categories', 10, 3);
- 
+/**
+Disable XML-RPC API to improve security.
+*/
+add_filter('xmlrpc_enabled', '__return_false');
+add_filter('xmlrpc_methods', '__return_empty_array');
